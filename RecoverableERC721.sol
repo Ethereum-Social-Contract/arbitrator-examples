@@ -10,9 +10,9 @@ contract RecoverableERC721 is ERC721 {
     arbitrator = _arbitrator;
   }
 
-  function compensateTheft(address rightfulOwner, uint256 tokenId) external {
+  function compensateTheft(address thief, address rightfulOwner, uint256 tokenId) external {
     require(msg.sender == arbitrator);
-    _owners[tokenId] = rightfulOwner;
+    _transfer(thief, rightfulOwner, tokenId);
   }
 }
 

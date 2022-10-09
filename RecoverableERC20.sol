@@ -12,7 +12,6 @@ contract RecoverableERC20 is ERC20 {
 
   function compensateTheft(address thief, address rightfulOwner, uint256 amount) external {
     require(msg.sender == arbitrator);
-    _balances[thief] -= amount;
-    _balances[rightfulOwner] += amount;
+    _transfer(thief, rightfulOwner, amount);
   }
 }
